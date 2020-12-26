@@ -1,0 +1,55 @@
+{% extends 'layouts/layout.html' %} {% block body %}
+<div class="jumbotron">
+    <div class="container wrapper">
+        <h1 class="display-3">Flight {{flight.id}}</h1>
+        <ul>
+            <li><strong>Origin</strong> {{flight.origin}}</li>
+            <li><strong>Destination: </strong> {{flight.destination}}</li>
+            <li><strong>Duration: </strong> {{flight.duration}}</li>
+        </ul>
+        <p class="lead">
+            <h2 class="display-5">Passengers</h2>
+            <div class="row">
+               
+                
+                 {% for passenger in passengers %}
+                 <div class="col-md-6 col-sm-6">
+                    <ul>
+                        <li class=" list-group-item active"><i class="fas fa-check-double"></i> {{passenger}}</li>
+                    </ul>
+                </div>
+                {% empty %}
+                <div class="col-md-6 col-sm-6">
+                    <p class="alert alert-info"><i class="fas fa-frown"></i> No Passengeers Yet!!!</p>
+                </div>
+                {% endfor %}
+                <div class="col-md-12 col-md-push-4">
+                    <a class="btn btn-outline-info" href="{% url 'index' %}">Back to Flights</a>
+                </div>
+
+            </div>
+        </p>
+   <div class="row">
+      <div class="col-md-8">
+         <h2 class="display-3">Add Passenger</h2>
+
+         <form action="{% url 'book' flight.id %}" method="post">
+         {% csrf_token %}
+         <select name="passenger">
+         {% for passenger in non_pass %}
+            <option tab="-1" value="" disabled selected>Select Option</option>
+            <option value="{{passenger.id}}"> {{passenger}}</option>
+         {% empty %}
+         <p class="alert alert-info"><i class="fas fa-frown"></i> No Passengeers to add!!!</p>  
+        
+         {% endfor %}
+          </select>
+         <button type="submit">Add</button> 
+         </form>
+      </div>
+   
+   </div>
+    </div>
+</div>
+
+{% endblock body %}

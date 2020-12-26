@@ -1,0 +1,17 @@
+{% extends "tasks/layouts/layout.html" %} {% block body %}
+<article class="wrapper container">
+  <h1 class="text-primary">{{sub_title}}</h1>
+  <div class="form">
+    <form method="post" action="{% url 'Tasks:add' %}">
+      {% csrf_token %} {{form}}
+      {% if status %}
+      <div class="alert-success">{{message}}</div>
+      {% elif not status %}
+      <div class="label-danger">{{message}}</div>
+      {% endif %} 
+      <button type="submit" name="addTask">Add Task</button>
+    </form>
+    <a href="{% url 'Tasks:index'%}">View Current Tasks ({{count}})</a>
+  </div>
+</article>
+{% endblock body %}

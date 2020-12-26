@@ -1,0 +1,13 @@
+{% extends "tasks/layouts/layout.html" %} 
+{% block body %}
+<article class="wrapper container">
+  <h1>Current Tasks</h1>
+  <ul class="list-group">
+    {% for task in tasks %}
+    <li class="list-group-item">{{task}}</li>
+    {% empty %}
+    <p class="alert alert-danger">Error!: No tasks found</p>
+    {% endfor %}
+  </ul>
+</article>
+{% endblock body %}

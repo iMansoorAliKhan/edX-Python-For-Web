@@ -1,0 +1,16 @@
+{% extends 'layouts/layout.html' %}
+{% block body %}
+
+<div class="container">
+    
+        <ul class="list-group">
+            {% for flight in flights %}
+            <li class="list-group-item active">Flight number : {{flight.id}} from {{flight.origin}} to {{flight.destination}} : <a class="btn btn-warning" href="{% url 'flight' flight.id %}">View Details</a> </li>  
+            {% empty %}
+            <li class="label-danger">No Flights going any where !!! Check back</li>
+            {% endfor %}
+
+        </ul>
+    
+</div>
+{% endblock body %}
